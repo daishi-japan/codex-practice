@@ -1,271 +1,326 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>社内AI勉強会 | 告知ページ</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
-
-    :root {
-      --bg: #0b1224;
-      --card: #0f172a;
-      --glass: rgba(255, 255, 255, 0.08);
-      --accent: #7dd3fc;
-      --accent-2: #a78bfa;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --border: rgba(255, 255, 255, 0.12);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
       min-height: 100vh;
-      background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.18), transparent 35%),
-                  radial-gradient(circle at 80% 0%, rgba(14, 165, 233, 0.18), transparent 35%),
-                  var(--bg);
-      color: var(--text);
-      font-family: 'Inter', 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 24px;
-      gap: 28px;
+      justify-content: center;
+      padding: 20px;
     }
 
-    header {
-      width: min(1100px, 100%);
-      border-radius: 22px;
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
       overflow: hidden;
-      position: relative;
-      background: linear-gradient(120deg, rgba(14, 165, 233, 0.32), rgba(167, 139, 250, 0.32)),
-                  linear-gradient(160deg, rgba(14, 165, 233, 0.24), rgba(34, 197, 94, 0.14));
-      box-shadow: var(--shadow);
-      isolation: isolate;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 0.8s ease-out;
     }
 
-    header::before,
-    header::after {
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 上部：画像エリア */
+    .hero-image {
+      width: 100%;
+      height: 500px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover .hero-image img {
+      transform: scale(1.05);
+    }
+
+    .hero-image::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      mix-blend-mode: screen;
-      opacity: 0.55;
-      filter: saturate(1.1) contrast(1.05);
-      z-index: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 150px;
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);
     }
 
-    header::before {
-      background-image: radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.16), transparent 30%),
-                        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.12), transparent 38%),
-                        linear-gradient(115deg, rgba(14, 165, 233, 0.35), rgba(59, 130, 246, 0.15));
-      transform: scale(1.03);
-      filter: blur(1px);
-    }
-
-    header::after {
-      background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80');
-      opacity: 0.65;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      padding: 54px 56px 80px;
+    /* AI バッジ */
+    .ai-badge {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      color: #667eea;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      z-index: 10;
       display: flex;
-      flex-direction: column;
-      gap: 18px;
-      backdrop-filter: blur(4px);
-    }
-
-    .eyebrow {
-      display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 12px;
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      width: fit-content;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-weight: 700;
-      color: #f8fafc;
     }
 
-    .eyebrow .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 0 6px rgba(125, 211, 252, 0.12);
+    .ai-badge::before {
+      content: '✨';
+      font-size: 18px;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(32px, 4vw, 46px);
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-      text-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    /* 下部：情報カードエリア */
+    .info-section {
+      padding: 60px 50px;
+      background: white;
     }
 
-    h1 span {
-      color: #cffafe;
-    }
-
-    .summary {
-      max-width: 640px;
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    .cta-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 14px;
-      padding: 12px 18px;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      letter-spacing: 0.01em;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
-      color: #0b1224;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 14px 32px rgba(67, 56, 202, 0.35);
-    }
-
-    .btn.secondary {
-      color: var(--text);
-      background: rgba(15, 23, 42, 0.55);
-      border: 1px solid var(--border);
-      box-shadow: none;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
-
-    main {
-      width: min(1100px, 100%);
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 26px 28px;
+    .info-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    main::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 15% 20%, rgba(125, 211, 252, 0.12), transparent 35%),
-                  radial-gradient(circle at 85% 30%, rgba(167, 139, 250, 0.12), transparent 35%);
-      opacity: 0.8;
-      pointer-events: none;
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
 
     .info-card {
+      padding: 32px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      transition: all 0.3s ease;
       position: relative;
-      padding: 18px 18px 16px 70px;
-      background: var(--glass);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      backdrop-filter: blur(8px);
       overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
-    .info-card .icon {
+    .info-card::before {
+      content: '';
       position: absolute;
-      left: 18px;
-      top: 18px;
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(125, 211, 252, 0.18), rgba(167, 139, 250, 0.18));
-      border: 1px solid var(--border);
-      display: grid;
-      place-items: center;
-      color: #e0f2fe;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .info-card h3 {
-      margin: 0 0 6px;
-      font-size: 17px;
-      letter-spacing: 0.01em;
+    .info-card:hover {
+      transform: translateX(8px);
+      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
     }
 
-    .info-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
+    .info-card:hover::before {
+      opacity: 1;
     }
 
-    @media (max-width: 720px) {
-      body { padding: 16px; }
-      .hero-content { padding: 40px 32px 56px; }
-      h1 { font-size: clamp(30px, 8vw, 38px); }
-      .summary { font-size: 16px; }
-      main { padding: 22px; }
-      .info-card { padding: 16px 16px 14px 62px; }
-      .info-card .icon { width: 38px; height: 38px; }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2d3748;
+      letter-spacing: -0.3px;
+    }
+
+    .card-content {
+      font-size: 16px;
+      color: #4a5568;
+      line-height: 1.6;
+      margin-left: 72px;
+      font-weight: 500;
+    }
+
+    /* タイトルカードは特別なスタイル */
+    .info-card.title-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px 32px;
+    }
+
+    .info-card.title-card::before {
+      background: white;
+    }
+
+    .info-card.title-card .card-icon {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .info-card.title-card .card-title {
+      color: white;
+      font-size: 20px;
+    }
+
+    .info-card.title-card .card-content {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: -0.5px;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      .container {
+        border-radius: 24px;
+      }
+
+      .hero-image {
+        height: 350px;
+      }
+
+      .ai-badge {
+        top: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        font-size: 12px;
+      }
+
+      .info-section {
+        padding: 40px 24px;
+      }
+
+      .info-card {
+        padding: 24px;
+      }
+
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+
+      .card-title {
+        font-size: 16px;
+      }
+
+      .card-content {
+        font-size: 14px;
+        margin-left: 64px;
+      }
+
+      .info-card.title-card .card-content {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      .hero-image {
+        height: 280px;
+      }
+
+      .info-section {
+        padding: 32px 20px;
+      }
+
+      .card-content {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="hero-content">
-      <div class="eyebrow"><span class="dot"></span>AI Learning Day</div>
-      <h1><span>社内AI勉強会</span> — 未来をつくるチームのためのアップデート</h1>
-      <p class="summary">
-        最新の生成AIトレンドと実践的な活用法を、デザイナー・エンジニア・ビジネスの視点から共有する社内限定イベントです。
-        業務効率化のヒントからクリエイティブな発想法まで、手触り感のあるワークショップで一緒に体験しましょう。
-      </p>
-      <div class="cta-row">
-        <button class="btn">参加登録する</button>
-        <button class="btn secondary">アジェンダを確認</button>
+  <div class="container">
+    <!-- 上部：画像エリア -->
+    <div class="hero-image">
+      <div class="ai-badge">AI Workshop 2024</div>
+      <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=85"
+           alt="AI勉強会のイメージ画像">
+    </div>
+
+    <!-- 下部：情報エリア -->
+    <div class="info-section">
+      <div class="info-cards">
+        <!-- タイトル -->
+        <div class="info-card title-card">
+          <div class="card-header">
+            <div class="card-icon">🎓</div>
+            <div class="card-title">イベントタイトル</div>
+          </div>
+          <div class="card-content">
+            社内AI勉強会 2024<br>〜未来を創るための学びの場〜
+          </div>
+        </div>
+
+        <!-- 開催日時 -->
+        <div class="info-card">
+          <div class="card-header">
+            <div class="card-icon">📅</div>
+            <div class="card-title">開催日時</div>
+          </div>
+          <div class="card-content">
+            2024年12月15日（金） 14:00 - 17:00
+          </div>
+        </div>
+
+        <!-- 場所 -->
+        <div class="info-card">
+          <div class="card-header">
+            <div class="card-icon">📍</div>
+            <div class="card-title">場所</div>
+          </div>
+          <div class="card-content">
+            本社オフィス 3階 カンファレンスルームA<br>
+            オンライン参加も可能（Zoom配信）
+          </div>
+        </div>
       </div>
     </div>
-  </header>
-
-  <main>
-    <div class="info-card">
-      <div class="icon" aria-hidden="true">🗓️</div>
-      <h3>開催日時</h3>
-      <p>2024年7月18日 (木) 13:00 - 16:30</p>
-    </div>
-    <div class="info-card">
-      <div class="icon" aria-hidden="true">📍</div>
-      <h3>場所</h3>
-      <p>本社オフィス 12F Sky Studio<br>オンライン配信 (Teams) 同時開催</p>
-    </div>
-    <div class="info-card">
-      <div class="icon" aria-hidden="true">🎯</div>
-      <h3>テーマ</h3>
-      <p>生成AIを味方につける業務デザインとプロトタイピング</p>
-    </div>
-  </main>
+  </div>
 </body>
 </html>
